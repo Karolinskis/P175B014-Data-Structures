@@ -49,7 +49,7 @@ Duomenų pavyzdžiai:
 | “{(})”       | False    |
 | „([(]{)})“   | False    |
 
-### **Uždavinys 2 (1 balas).
+### **Uždavinys 2 (1 balas).**
 Duotas skaičius n (1 ≤ n ≤ 105), nurodantis skaičių sekos ilgį. 
 Duota skaičių seka 𝑎1, 𝑎2, … , 𝑎𝑛 ir skaičius m (1 ≤ m ≤ n), nurodantis lango ilgį. 
 Raskite maksimalią reikšmę kiekviename poslinkio lange. Žemiau pateiktas pavyzdys, kai m = 4:
