@@ -25,3 +25,53 @@ skaičius.
 
 Spausdinamas sąrašas turi būti surikiuotas pagal dėstytojų pavardes ir vardus abėcėlės tvarka.
 Sudarykite nurodyto dėstytojo (įvedama klaviatūra) projektinių darbų sąrašą. 
+
+## Pradiniai duomenys ir rezultatai
+### Pradiniai duomenys
+* Konsolė
+```
+Giedrius Ziberkas
+```
+
+* U22a.txt
+```
+Rekursija,Jusas,Vacius,20
+Susietasis sąrašas,Burbaitė,Renata,25
+Polimorfizmas,Jančiukas,Mindaugas,21
+Deklraratyvusis programavimas,Giedrius,Ziberkas,22
+Užklausos LINQ,Nabutaitė,Lina,23
+Lambda išraiškų taikymas,Jusas,Vacius,22
+```
+* U22b.txt
+```
+Rekursija,Pavardenis,Vardenis,IFF/1-1
+Susietasis sąrašas,Pavardaitė,Vardaitė,IFF/1-1
+Polimorfizmas,Jonas,Jonaitis,IFF/1-2
+Deklraratyvusis programavimas,Arnas,Šablinskas,IFF/1-1
+Rekursija,Domantas,Vaičiulis,IFF/1-3
+Susietasis sąrašas,Donatas,Kušleika,IFF/1-4
+Lambda išraiškų taikymas,Gabija,Grinkevičiūtė,IFF/1-5
+```
+
+### Rezultatai:
+* Konsolė
+```
+Daugiausiai projektinių darbų turintis dėstytojas: 
+Jusas Vacius
+```
+
+* ProfRez.txt
+```
+Pavardė Vardas 
+Jusas Vacius
+Burbaitė Renata
+Jančiukas Mindaugas
+Giedrius Ziberkas
+```
+
+* ProjRez.txt
+```
+Projekto pavadinimas 
+Deklraratyvusis programavimas
+```
+
