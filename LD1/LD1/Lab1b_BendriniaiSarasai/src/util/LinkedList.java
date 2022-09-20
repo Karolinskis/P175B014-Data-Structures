@@ -72,7 +72,15 @@ public class LinkedList<E extends Comparable<E>>
         if (k < 0 || k >= size) {
             return false;
         }
-        throw new UnsupportedOperationException("Studentams reikia realizuoti add(int k, E e)");
+
+        for (int i = 0; i < k; i++) {
+            current = current.next;
+        }
+
+        Node newNode = new Node(e, current.next);
+        current.next = newNode;
+
+        return true;
     }
 
     /**
@@ -129,7 +137,15 @@ public class LinkedList<E extends Comparable<E>>
      */
     @Override
     public E set(int k, E e) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti set(int k, E e)");
+
+        E oldElement = current.findNode(k).element;
+
+        for (int i = 0; i < k; i++) {
+            current = current.next;
+        }
+
+        current.element = e;
+        return oldElement;
     }
 
     /**
@@ -157,7 +173,18 @@ public class LinkedList<E extends Comparable<E>>
      */
     @Override
     public E remove(int k) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti remove(int k)");
+        Node<E> previous = null;
+        E removedElement = null;
+
+        for (int i = 0; i < k; i++) {
+            previous = current;
+            current = current.next;
+        }
+
+        removedElement = current.element;
+        previous = current.next;
+
+        return removedElement;
     }
 
     /**
@@ -317,7 +344,8 @@ public class LinkedList<E extends Comparable<E>>
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException("Studentams reikia realizuoti remove()");
+            iterPosition = iterPosition.next; // ???
+
         }
     }
 
