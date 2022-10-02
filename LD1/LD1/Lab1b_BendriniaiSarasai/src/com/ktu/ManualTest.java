@@ -16,10 +16,10 @@ public class ManualTest {
     void execute() {
         createCars();
         createCarList();
-//        countRenault();
-//        appendCarList();
-//        checkCarMarketFilters();
-//        checkCarMarketSorting();
+        countRenault();
+        appendCarList();
+        checkCarMarketFilters();
+        checkCarMarketSorting();
     }
 
     void createCars() {
@@ -67,18 +67,18 @@ public class ManualTest {
                 + (cars.get(3).getPrice() + cars.get(4).getPrice()
                 + cars.get(5).getPrice()));
         // palaipsniui atidenkite sekančias eilutes ir išbandykite
-//        cars.add(0, new Car("Mazda","6",2007,50000,27000));
-//        cars.add(6, new Car("Hyundai","Lantra",1998,9500,777));
-//        cars.set(4, c3);
-//        cars.println("Po įterpimų");
-//        cars.remove(7);
-//        cars.remove(0);
-//        cars.println("Po išmetimų");
-//        cars.remove(0); cars.remove(0); cars.remove(0);
-//        cars.remove(0); cars.remove(0); cars.remove(0);
-//        cars.println("Po visų išmetimų");
-//        cars.remove(0);
-//        cars.println("Po visų išmetimų");
+        cars.add(0, new Car("Mazda","6",2007,50000,27000));
+        cars.add(6, new Car("Hyundai","Lantra",1998,9500,777));
+        cars.set(4, c3);
+        cars.println("Po įterpimų");
+        cars.remove(7);
+        cars.remove(0);
+        cars.println("Po išmetimų");
+        cars.remove(0); cars.remove(0); cars.remove(0);
+        cars.remove(0); cars.remove(0); cars.remove(0);
+        cars.println("Po visų išmetimų");
+        cars.remove(0);
+        cars.println("Po visų išmetimų");
     }
 
     void countRenault() {

@@ -66,6 +66,10 @@ public class LinkedList<E extends Comparable<E>>
      */
     @Override
     public boolean add(int k, E e) {
+        // Studentams reikia realizuoti add(int k, E e)
+
+        current = first;
+
         if (e == null) {
             return false;
         }
@@ -79,7 +83,7 @@ public class LinkedList<E extends Comparable<E>>
 
         Node newNode = new Node(e, current.next);
         current.next = newNode;
-
+        size++;
         return true;
     }
 
@@ -137,6 +141,12 @@ public class LinkedList<E extends Comparable<E>>
      */
     @Override
     public E set(int k, E e) {
+        // Studentams reikia realizuoti set(int k, E e)
+        current = first;
+
+        if (size < k) {
+            return null;
+        }
 
         E oldElement = current.findNode(k).element;
 
@@ -173,17 +183,27 @@ public class LinkedList<E extends Comparable<E>>
      */
     @Override
     public E remove(int k) {
-        Node<E> previous = null;
-        E removedElement = null;
+        // Studentams reikia realizuoti remove(int k)
+        if (k < 0 || k >= size) {
+            return null;
+        }
 
-        for (int i = 0; i < k; i++) {
-            previous = current;
+
+        if (k == 0) {
+            E removedElement = first.element;
+            first = first.next;
+            size--;
+            return removedElement;
+        }
+
+        current = first;
+        for (int i = 0; i < k-1; i++) {
             current = current.next;
         }
 
-        removedElement = current.element;
-        previous = current.next;
-
+        E removedElement = current.next.element;
+        current.next = current.next.next;
+        size--;
         return removedElement;
     }
 
@@ -344,6 +364,7 @@ public class LinkedList<E extends Comparable<E>>
 
         @Override
         public void remove() {
+            // Studentams reikia realizuoti remove()
             iterPosition = iterPosition.next; // ???
 
         }
