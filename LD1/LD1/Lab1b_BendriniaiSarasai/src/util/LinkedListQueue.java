@@ -28,9 +28,11 @@ public class LinkedListQueue<E> implements Queue<E> {
      */
     @Override
     public E dequeue() {
-        E tempElem = list.get(0);
-        list.remove(0);
-        return tempElem;
+        return list.removeFirst();
+    }
+
+    public E dequeueRear() {
+        return list.removeLast();
     }
 
     /**
@@ -41,6 +43,12 @@ public class LinkedListQueue<E> implements Queue<E> {
     public E peak() {
         return list.get(0);
     }
+
+    /**
+     * Checks the last element in the queue
+     * @return returns the last element in the queue
+     */
+    public E peakLast() { return list.getLast(); }
 
     /**
      * Checks if the queue is empty
