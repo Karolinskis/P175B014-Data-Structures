@@ -22,14 +22,6 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     /**
-     * Removes element at given index
-     * @param index index of element to remove
-     */
-    public void remove(int index){
-        arr.remove(index);
-    }
-
-    /**
      * Removes first element from stack and returns it
      * @return first element of stack
      */
@@ -65,5 +57,14 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public boolean isEmpty() {
         return arr.isEmpty();
+    }
+
+    /**
+     * Dumps all data as a string.
+     * ONLY USED FOR TESTING
+     * @return all data as a string
+     */
+    public String DumpAll() {
+        return arr.toString();
     }
 }

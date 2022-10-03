@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Random;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class SimpleBenchmark {
 
     Car[] cars;

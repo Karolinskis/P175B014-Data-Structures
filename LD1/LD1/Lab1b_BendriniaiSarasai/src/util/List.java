@@ -31,7 +31,7 @@ public interface List<E> {
     boolean isEmpty();
 
     /**
-     * Removes all of the elements from this list.
+     * Removes all the elements from this list.
      */
     void clear();
 

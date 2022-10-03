@@ -1,18 +1,193 @@
 package com.ktu;
 
-import util.ArrayStack;
-import util.LinkedListQueue;
+import util.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TaskTest {
     public static void main(String[] args) {
-        OPTTask1Tests();
-
-        OPTTask2Tests();
+        new TaskTest().execute();
 
     }
+
+    void execute() {
+        // Main task
+        System.out.println("------ Task 1 ------");
+        ArrayQueueTests();
+        ArrayStackTests();
+
+        LinkedListQueueTests();
+        LinkedListStackTests();
+        // Optional tasks
+        OPTTask1Tests();
+        OPTTask2Tests();
+    }
+
+    private void LinkedListStackTests() {
+        LinkedListStack<Integer> testListS = new LinkedListStack<>();
+
+        System.out.println("  -- ArrayStack --");
+        // Initial array
+        System.out.println("Initial stack");
+        Ks.oun(testListS.DumpAll());
+
+        // Adding element to end of stack | add()
+        System.out.println("Adding elements to end of array | add()");
+        testListS.add(1);
+        Ks.oun(testListS.DumpAll());
+        testListS.add(2);
+        Ks.oun(testListS.DumpAll());
+        testListS.add(3);
+        Ks.oun(testListS.DumpAll());
+
+        // Remove first element from stack and return it | pop()
+        System.out.println("Removing first element from stack and return it | pop()");
+        Ks.oun(testListS.DumpAll());
+        Ks.oun("Result: " + testListS.pop().toString());
+        Ks.oun(testListS.DumpAll());
+
+        // Insert new item to start of stack | push(E item)
+        System.out.println("Inserts new item to start of stack | push(E item)");
+        Ks.oun(testListS.DumpAll());
+        testListS.push(0);
+        Ks.oun(testListS.DumpAll());
+
+        // Checks the first element in stack | peak()
+        System.out.println("Checks the first element in stack | peak()");
+        Ks.oun(testListS.DumpAll());
+        Ks.oun("Result: " + testListS.peak().toString());
+        Ks.oun(testListS.DumpAll());
+
+        // Checks if the stack is empty | isEmpty()
+        System.out.println("Checks if the stack is empty | isEmpty()");
+        Ks.oun(testListS.DumpAll());
+        Ks.oun("Result: " + testListS.isEmpty());
+        testListS.pop(); testListS.pop(); testListS.pop();   // Remove all elements
+        Ks.oun(testListS.DumpAll());
+        Ks.oun("Result: " + testListS.isEmpty());
+    }
+
+    private void LinkedListQueueTests() {
+        LinkedListQueue<Integer> testListsQ = new LinkedListQueue<>();
+
+        System.out.println("  -- LinkedListQueue --");
+        // Initial array
+        System.out.println("Initial queue");
+        Ks.oun(testListsQ.DumpAll());
+
+        // Adding new elements
+        System.out.println("Adding new elements | enqueue()");
+        testListsQ.enqueue(2);
+        Ks.oun(testListsQ.DumpAll());
+        testListsQ.enqueue(4);
+        Ks.oun(testListsQ.DumpAll());
+
+        // Check the first element
+        System.out.println("Checking the first element | peak()");
+        Ks.oun("Current array: " + testListsQ.DumpAll());
+        Ks.oun("peak() output: " + testListsQ.peak());
+
+        // Removing elements
+        System.out.println("Removing elements | dequeue()");
+        testListsQ.dequeue();
+        Ks.oun(testListsQ.DumpAll());
+        testListsQ.dequeue();
+        Ks.oun(testListsQ.DumpAll());
+
+        // Checking if the queue is empty
+        System.out.println("Checking if the queue is empty | isEmpty()");
+        Ks.oun("   Current array: " + testListsQ.DumpAll());
+        Ks.oun("isEmpty() output: " + testListsQ.isEmpty());
+        testListsQ.enqueue(2);
+        Ks.oun("   Current array: " + testListsQ.DumpAll());
+        Ks.oun("isEmpty() output: " + testListsQ.isEmpty());
+    }
+
+    public static void ArrayQueueTests() {
+        ArrayQueue<Integer> testArrayQ = new ArrayQueue<>();
+
+        System.out.println("  -- ArrayQueue --");
+        // Initial array
+        System.out.println("Initial queue");
+        Ks.oun(testArrayQ.DumpAll());
+
+        // Adding new elements
+        System.out.println("Adding new elements | enqueue()");
+        testArrayQ.enqueue(2);
+        Ks.oun(testArrayQ.DumpAll());
+        testArrayQ.enqueue(4);
+        Ks.oun(testArrayQ.DumpAll());
+
+        // Check the first element
+        System.out.println("Checking the first element | peak()");
+        Ks.oun("Current array: " + testArrayQ.DumpAll());
+        Ks.oun("peak() output: " + testArrayQ.peak());
+
+        // Removing elements
+        System.out.println("Removing elements | dequeue()");
+        testArrayQ.dequeue();
+        Ks.oun(testArrayQ.DumpAll());
+        testArrayQ.dequeue();
+        Ks.oun(testArrayQ.DumpAll());
+
+        // Checking if the queue is empty
+        System.out.println("Checking if the queue is empty | isEmpty()");
+        Ks.oun("   Current array: " + testArrayQ.DumpAll());
+        Ks.oun("isEmpty() output: " + testArrayQ.isEmpty());
+        testArrayQ.enqueue(2);
+        Ks.oun("   Current array: " + testArrayQ.DumpAll());
+        Ks.oun("isEmpty() output: " + testArrayQ.isEmpty());
+    }
+
+    public static void ArrayStackTests() {
+        ArrayStack<Integer> testArrayS = new ArrayStack<>();
+
+        System.out.println("  -- ArrayStack --");
+        // Initial array
+        System.out.println("Initial stack");
+        Ks.oun(testArrayS.DumpAll());
+
+        // Adding element to end of stack | add()
+        System.out.println("Adding elements to end of array | add()");
+        testArrayS.add(1);
+        Ks.oun(testArrayS.DumpAll());
+        testArrayS.add(2);
+        Ks.oun(testArrayS.DumpAll());
+        testArrayS.add(3);
+        Ks.oun(testArrayS.DumpAll());
+
+        // Remove first element from stack and return it | pop()
+        System.out.println("Removing first element from stack and return it | pop()");
+        Ks.oun(testArrayS.DumpAll());
+        Ks.oun("Result: " + testArrayS.pop().toString());
+        Ks.oun(testArrayS.DumpAll());
+
+        // Insert new item to start of stack | push(E item)
+        System.out.println("Inserts new item to start of stack | push(E item)");
+        Ks.oun(testArrayS.DumpAll());
+        testArrayS.push(0);
+        Ks.oun(testArrayS.DumpAll());
+
+        // Checks the first element in stack | peak()
+        System.out.println("Checks the first element in stack | peak()");
+        Ks.oun(testArrayS.DumpAll());
+        Ks.oun("Result: " + testArrayS.peak().toString());
+        Ks.oun(testArrayS.DumpAll());
+
+        // Checks if the stack is empty | isEmpty()
+        System.out.println("Checks if the stack is empty | isEmpty()");
+        Ks.oun(testArrayS.DumpAll());
+        Ks.oun("Result: " + testArrayS.isEmpty());
+        testArrayS.pop(); testArrayS.pop(); testArrayS.pop();   // Remove all elements
+        Ks.oun(testArrayS.DumpAll());
+        Ks.oun("Result: " + testArrayS.isEmpty());
+
+    }
+
+
+
+
 
     public static void OPTTask1Tests() {
         String[] tests = {

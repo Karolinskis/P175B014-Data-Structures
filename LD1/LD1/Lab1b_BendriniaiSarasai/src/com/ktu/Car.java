@@ -14,6 +14,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import util.Parsable;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class Car implements Parsable<Car> {
 
     // bendri duomenys visiems automobiliams (visai klasei)

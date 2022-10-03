@@ -9,7 +9,7 @@ public class LinkedListStack<E> implements Stack<E>{
      * Construct an empty list
      */
     public LinkedListStack() {
-        list = new LinkedList<E>();
+        list = new LinkedList<>();
     }
 
     /**
@@ -64,5 +64,14 @@ public class LinkedListStack<E> implements Stack<E>{
     @Override
     public boolean isEmpty() {
         return list.isEmpty();
+    }
+
+    /**
+     * Dumps all data as a string.
+     * ONLY USED FOR TESTING
+     * @return all data as a string
+     */
+    public String DumpAll() {
+        return list.toString();
     }
 }

@@ -50,4 +50,13 @@ public class ArrayQueue<E> implements Queue<E> {
     public boolean isEmpty() {
         return arr.isEmpty();
     }
+
+    /**
+     * Dumps all data as a string.
+     * ONLY USED FOR TESTING
+     * @return all data as a string
+     */
+    public String DumpAll() {
+        return arr.toString();
+    }
 }

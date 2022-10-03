@@ -9,6 +9,7 @@ import util.Ks;
 import java.util.Comparator;
 import java.util.Locale;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class ManualTest {
 
     CarList cars = new CarList();
