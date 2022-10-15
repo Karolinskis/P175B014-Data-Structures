@@ -1,4 +1,9 @@
 # P175B014-Data-Structures
  
 Lab work of module P175B014-Data-Structures.
-Wrote using Intellij IDEA 
+
+Projects in this repository:
+- [x] LD1 - Tiesinės duomenų struktūros
+- [ ] LD2 - Aibės ir medžiai
+- [ ] LD3 - Maišos lentelės
+- [ ] Technologinis projektas (TP)
