@@ -111,7 +111,7 @@ privalumai ir trūkumai?
 Sukuriami automobilių klasės objektai iš eilės nuo `c1` iki `c18`. Jie sudedami į medį tokia
 eilės tvarka:
 
-`c9, c7, c8, c16, c17, c18, c11, c5, c1, c6, c2, c10, c3, c4, c15, c12, c13, c14`
+*c9, c7, c8, c16, c17, c18, c11, c5, c1, c6, c2, c10, c3, c4, c15, c12, c13, c14*
 
 Sukurtas medis atrodo taip:
 
