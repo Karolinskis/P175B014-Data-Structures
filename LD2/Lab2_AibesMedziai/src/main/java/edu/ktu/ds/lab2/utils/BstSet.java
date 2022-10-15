@@ -140,6 +140,7 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
      */
     @Override
     public void remove(E element) {
+        root = removeRecursive(element, root);
         throw new UnsupportedOperationException("Studentams reikia realizuoti remove(E element)");
     }
 
@@ -154,7 +155,46 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     }
 
     private BstNode<E> removeRecursive(E element, BstNode<E> node) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti removeRecursive(E element, BstNode<E> n)");
+        // Base case: tree is empty
+        if (node == null) {
+            return null;
+        }
+
+        // Nothing to remove
+        if (element == null) {
+            return node;
+        }
+
+        if (element.compareTo(node.element) < 0)
+            node.left = removeRecursive(element, node.left);
+        else if (element.compareTo(node.element) > 0)
+            node.right = removeRecursive(element, node.right);
+        // If element is same as current node element
+        // than this is the noe to remove
+        else {
+            // Node with none or only one child
+            if (node.left == null)
+                return node.right;
+            else if (node.right == null)
+                return node.left;
+
+            // Node with two children
+            // Get smallest in the subtree
+            E minv = node.element;
+            BstNode<E> tempRoot = root;
+            while (node.left != null) {
+                minv = root.left.element;
+                node = node.left;
+            }
+            node.element = minv;
+
+            // Delete inorder successor
+            node.right = removeRecursive(node.element, node.right);
+        }
+
+        return node;
+
+        //throw new UnsupportedOperationException("Studentams reikia realizuoti removeRecursive(E element, BstNode<E> n)");
     }
 
     private E get(E element) {
