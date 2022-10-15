@@ -35,6 +35,7 @@ Klasėje `AvlSet` reikia realizuoti šiuos metodus:
 | 8             	| `Class AvlSet: remove()`      	| `Class java.util.TreeSet<E>: remove()`   	|
 | 9             	| `Class AvlSet: contains()`    	| `Class java.util.TreeSet<E>: contains()` 	|
 
+**Duotas greitaveikos testavimo variantas: 5**
 
 __Laisva forma parenkite atskaitą. Ataskaitoje turi būti:__
 1. Aprašyti tiriamieji metodai.
@@ -137,6 +138,8 @@ Ištrinami *c11, c13, c15, c14* elementai ir gautas medis atrodo taip:
 Ištrinamas *c6* elementas ir gautas medis atrodo taip:
 
 ![](images/testing_6.png)
+
+***
 
 ### Papildomai (priklauso nuo realizacijos)
 
