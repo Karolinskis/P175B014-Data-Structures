@@ -72,11 +72,67 @@ public class AvlSet<E extends Comparable<E>> extends BstSet<E> implements Sorted
      */
     @Override
     public void remove(E element) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti remove(E element)");
+        // TODO : Studentams reikia realizuoti remove(E element)
+        if (element == null) {
+            throw new IllegalArgumentException("Element is null in remove(E element)");
+        }
+
+        if (size <= 0) {
+            throw new IllegalArgumentException("Set is empty");
+        }
+
+        root = removeRecursive(element, (AVLNode<E>) root);
+
+
     }
 
     private AVLNode<E> removeRecursive(E element, AVLNode<E> n) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti removeRecursive(E element, AVLNode<E> n)");
+        // TODO : Studentams reikia realizuoti removeRecursive(E element, AVLNode<E> n)
+        if (n == null) {
+            return null;
+        }
+
+        // Element to remove in the tree
+        int compare = c.compare(element, n.element);
+
+        if (compare < 0 ) {
+            n.setLeft(removeRecursive(element, n.getLeft()));
+            if (height(n.getRight()) - height(n.getLeft()) == 2) {
+                if (height(n.getRight().getLeft()) > height(n.getRight().getRight())) {
+                    n = doubleLeftRotation(n);
+                } else {
+                    n = leftRotation(n);
+                }
+            }
+        } else if (compare > 0) {
+            n.setRight(removeRecursive(element, n.getRight()));
+            if (height(n.getLeft()) - height(n.getRight()) == 2) {
+                if (height(n.getLeft().getLeft()) > height(n.getLeft().getRight())) {
+                    n = rightRotation(n);
+                } else {
+                    n = doubleRightRotation(n);
+                }
+            }
+        } else if (n.getLeft() != null && n.getRight() != null) {
+            // TODO : Fix this
+            n.element = ((AVLNode<E>) getMax(n.getLeft())).element;
+            n.setLeft(removeRecursive(n.element, n.getLeft()));
+            if (height(n.getRight()) - height(n.getLeft()) == 2) {
+                if (height(n.getRight().getLeft()) > height(n.getRight().getRight())) {
+                    n = doubleLeftRotation(n);
+                } else {
+                    n = leftRotation(n);
+                }
+            }
+        } else { // Other cases
+            n = (n.getLeft() != null) ? n.getLeft() : n.getRight();
+            size--;
+        }
+        if (n != null) {
+            n.height = Math.max(height(n.getLeft()), height(n.getRight())) + 1;
+        }
+        return n;
+
     }
 
     // Papildomi privatūs metodai, naudojami operacijų su aibe realizacijai
