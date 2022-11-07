@@ -90,49 +90,69 @@ public class AvlSet<E extends Comparable<E>> extends BstSet<E> implements Sorted
         // TODO : Studentams reikia realizuoti removeRecursive(E element, AVLNode<E> n)
 
         if (n == null) {
-            return null;
+            return n;
         }
 
-        // Element to remove in the tree
+        // Traversal
         int compare = c.compare(element, n.element);
-
-        if (compare < 0 ) {
-            n.setLeft(removeRecursive(element, n.getLeft()));
-            if (height(n.getRight()) - height(n.getLeft()) == 2) {
-                if (height(n.getRight().getLeft()) > height(n.getRight().getRight())) {
-                    n = doubleLeftRotation(n);
-                } else {
-                    n = leftRotation(n);
-                }
-            }
+        if (compare < 0) {
+            n.left = removeRecursive(element, (AVLNode<E>) n.left);
         } else if (compare > 0) {
-            n.setRight(removeRecursive(element, n.getRight()));
-            if (height(n.getLeft()) - height(n.getRight()) == 2) {
-                if (height(n.getLeft().getLeft()) > height(n.getLeft().getRight())) {
-                    n = rightRotation(n);
-                } else {
-                    n = doubleRightRotation(n);
-                }
-            }
-        } else if (n.getLeft() != null && n.getRight() != null) {
-            n.element = ((AVLNode<E>) getMax(n.getLeft())).element;
-            n.setLeft(removeRecursive(n.element, n.getLeft()));
-            if (height(n.getRight()) - height(n.getLeft()) == 2) {
-                if (height(n.getRight().getLeft()) > height(n.getRight().getRight())) {
-                    n = doubleLeftRotation(n);
-                } else {
-                    n = leftRotation(n);
-                }
-            }
-        } else { // Other cases
-            n = (n.getLeft() != null) ? n.getLeft() : n.getRight();
+            n.right = removeRecursive(element, (AVLNode<E>) n.right);
+        }
+        // Removing the node
+        else {
             size--;
+            // No branch
+            if (n.left == null && n.right == null) {
+                n = null;
+            }
+            // Branch on the right
+            else if (n.left == null) {
+                n = (AVLNode<E>) n.right;
+            }
+            // Branch on the left
+            else if (n.right == null) {
+                n = (AVLNode<E>) n.left;
+            }
+            // Both branches
+            else {
+                AVLNode exchangeValNode = (AVLNode) getMostLeftNode(n.right);
+                n.element = (E)exchangeValNode.element;
+                n.right = removeRecursive((E)exchangeValNode.element, (AVLNode<E>) n.right);
+            }
         }
-        if (n != null) {
-            n.height = Math.max(height(n.getLeft()), height(n.getRight())) + 1;
-        }
-        return n;
 
+        if (n == null) {
+            return n;
+        }
+
+        n.height = Math.max(height((AVLNode<E>) n.left), height((AVLNode<E>) n.right)) +1;
+        int balance = getBalance(n);
+
+        // If balance is positive, left side has too many elements
+        if (balance > 1 && getBalance((AVLNode<E>) n.left) >= 0) {
+            return rightRotation(n);
+        }
+        if (balance > 1 && getBalance((AVLNode<E>)n.left) <0) {
+            return doubleRightRotation(n);
+        }
+        // Balance is negative, right side has too many elements
+        if (balance < -1 && getBalance((AVLNode<E>)n.right) <= 0 ) {
+            return leftRotation(n);
+        }
+        if (balance < -1 && getBalance((AVLNode<E>)n.right) > 0) {
+            return doubleLeftRotation(n);
+        }
+
+        return n;
+    }
+
+    private int getBalance(AVLNode<E> node) {
+        if (node == null) {
+            return 0;
+        }
+        return height((AVLNode<E>) node.left) - height((AVLNode<E>) node.right);
     }
 
     // Papildomi privatūs metodai, naudojami operacijų su aibe realizacijai
