@@ -120,7 +120,15 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     @Override
     public boolean containsAll(Set<E> set) {
         // TODO: Studentams reikia realizuoti containsAll(Set<E> set)
-        throw new UnsupportedOperationException("Studentams reikia realizuoti containsAll(Set<E> set)");
+
+        Object[] array = set.toArray();
+        for (Object object : array) {
+            if (!contains((E)object)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -145,7 +153,10 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     @Override
     public void addAll(Set<E> set) {
         // TODO : Studentams reikia realizuoti addAll(Set<E> set)
-        throw new UnsupportedOperationException("Studentams reikia realizuoti addAll(Set<E> set)");
+
+        for (E element: set) {
+            this.add(element);
+        }
     }
 
     private BstNode<E> addRecursive(E element, BstNode<E> node) {
@@ -174,7 +185,12 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     public void remove(E element) {
         root = removeRecursive(element, root);
         // TODO : Studentams reikia realizuoti remove(E element)
-        throw new UnsupportedOperationException("Studentams reikia realizuoti remove(E element)");
+
+        if (element == null) {
+            throw new IllegalArgumentException("Element is null in remove(E element)");
+        }
+
+        root = removeRecursive(element, root);
     }
 
     /**
@@ -185,50 +201,59 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     @Override
     public void retainAll(Set<E> set) {
         // TODO : Studentams reikia realizuoti retainAll(Set<E> set)
-        throw new UnsupportedOperationException("Studentams reikia realizuoti retainAll(Set<E> set)");
+        for (E element : this) {
+            if (!set.contains(element)) {
+                remove(element);
+            }
+        }
     }
 
     private BstNode<E> removeRecursive(E element, BstNode<E> node) {
         // TODO : Studentams reikia realizuoti removeRecursive(E element, BstNode<E> n)
 
-        // Base case: tree is empty
+        // perform standard bst remove
         if (node == null) {
-            return null;
-        }
-
-        // Nothing to remove
-        if (element == null) {
             return node;
         }
 
-        if (element.compareTo(node.element) < 0)
+        // Traversal
+        int compare = c.compare(element, node.element);
+        if (compare < 0) {
             node.left = removeRecursive(element, node.left);
-        else if (element.compareTo(node.element) > 0)
+        }
+        else if (compare > 0) {
             node.right = removeRecursive(element, node.right);
-        // If element is same as current node element
-        // than this is the noe to remove
-        else {
-            // Node with none or only one child
-            if (node.left == null)
-                return node.right;
-            else if (node.right == null)
-                return node.left;
-
-            // Node with two children
-            // Get smallest in the subtree
-            E minv = node.element;
-            BstNode<E> tempRoot = root;
-            while (node.left != null) {
-                minv = root.left.element;
+        }
+        else {  // Removing node
+            size--;
+            // No branch
+            if (node.left == null && node.right == null) {
+                node = null;
+            }
+            // Branch on right
+            else if (node.left == null) {
+                node = node.right;
+            }
+            // Branch on the left
+            else if (node.right == null) {
                 node = node.left;
             }
-            node.element = minv;
-
-            // Delete inorder successor
-            node.right = removeRecursive(node.element, node.right);
+            else { // Both branches
+                BstNode<E> exchangeValueNode = getMostLeftNode(node.right);
+                node.element = exchangeValueNode.element;
+                node.right = removeRecursive((E)exchangeValueNode.element, node.right);
+            }
         }
 
         return node;
+    }
+
+    protected BstNode<E> getMostLeftNode(BstNode<E> node) {
+        BstNode<E> current = node;
+        while (current.left != null) {
+            current = current.left;
+        }
+        return current;
     }
 
     private E get(E element) {
@@ -368,7 +393,28 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     @Override
     public Set<E> headSet(E element) {
         // TODO : Studentams reikia realizuoti headSet()
-        throw new UnsupportedOperationException("Studentams reikia realizuoti headSet()");
+
+        if (element == null) {
+            throw new IllegalArgumentException("Element is null in get(E element)");
+        }
+
+        BstSet<E> headSet = new BstSet<>();
+        headSetRecursive(element, root, headSet);
+        return headSet;
+    }
+    private void headSetRecursive(E element, BstNode<E> node, BstSet<E> outputSet) {
+        if (node == null) {
+            return;
+        }
+
+        int compare = c.compare(node.element, element);
+        if (compare <= 0) {
+            outputSet.add(node.element);
+        }
+        headSetRecursive(element, node.left, outputSet);
+        if (compare < 0) {
+            headSetRecursive(element, node.right, outputSet);
+        }
     }
 
     private BstSet<E> headset = null;
@@ -416,31 +462,32 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     @Override
     public Set<E> subSet(E element1, E element2) {
         // TODO : Studentams reikia realizuoti subSet()
-        BstSet<E> tailSet = (BstSet<E>) tailSet(element1);
-        BstSet<E> headset = new BstSet<>();
-
-        if (tailSet.root == null) {
-            return null;
+        if (element1 == null || element2 == null) {
+            throw new IllegalArgumentException("Element is null");
         }
-        if (tailSet.root.element.equals(element2)) {
-            headset.root = new BstNode<>(tailSet.root.element);
-            return headset;
-        }
-        if (setRecursive(element2, tailSet.root.left)) {
-            BstNode<E> temp = new BstNode<>(tailSet.root.element);
-            temp.left = headset.root;
-            headset.root = temp;
-        } else if (setRecursive(element2, tailSet.root.right)) {
-            BstNode<E> temp = new BstNode<>(tailSet.root.element);
-            temp.right = headset.root;
-            headset.root = temp;
-        } else {
-            return null;
-        }
-        return headset;
+        BstSet<E> subSet = new BstSet<>();
+        subSetRecursive(element1, element2, root, subSet);
+        return subSet;
+    }
 
+    private void subSetRecursive(E lowerValue, E higherValue, BstNode<E> node, BstSet<E> outputSet) {
+        if (node == null) {
+            return;
+        }
 
-        //throw new UnsupportedOperationException("Studentams reikia realizuoti subSet()");
+        int compareHigher = c.compare(node.element, higherValue);
+        int compareLower = c.compare(node.element, lowerValue);
+
+        if (compareHigher <= 0 && compareLower >= 0) {
+            outputSet.add(node.element);
+        }
+
+        if (compareLower > 0) {
+            subSetRecursive(lowerValue, higherValue, node.left, outputSet);
+        }
+        if (compareHigher < 0) {
+            subSetRecursive(lowerValue, higherValue, node.right, outputSet);
+        }
     }
 
     /**
@@ -452,9 +499,27 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
     @Override
     public Set<E> tailSet(E element) {
         // TODO : Studentams reikia realizuoti tailSet()
+        if (element == null) {
+            throw new IllegalArgumentException("Element is null in get(E element)");
+        }
         BstSet<E> tailSet = new BstSet<>();
-        tailSet.root = this.cloneRecursive(this.find(element));
+        tailSetRecursive(element, root, tailSet);
         return tailSet;
+    }
+
+    private void tailSetRecursive(E element, BstNode<E> node, BstSet<E> outputSet) {
+        if (node == null) {
+            return;
+        }
+
+        int compare = c.compare(node.element, element);
+        if (compare >= 0) {
+            outputSet.add(node.element);
+        }
+        if (compare > 0) {
+            tailSetRecursive(element, node.left, outputSet);
+        }
+        tailSetRecursive(element, node.right, outputSet);
     }
 
     /**
@@ -526,7 +591,7 @@ public class BstSet<E extends Comparable<E>> implements SortedSet<E>, Cloneable 
         @Override
         public void remove() {
             // TODO : Studentams reikia realizuoti remove()
-            removeRecursive(last.element, last);
+            stack.pop();
 
         }
 

@@ -88,6 +88,7 @@ public class AvlSet<E extends Comparable<E>> extends BstSet<E> implements Sorted
 
     private AVLNode<E> removeRecursive(E element, AVLNode<E> n) {
         // TODO : Studentams reikia realizuoti removeRecursive(E element, AVLNode<E> n)
+
         if (n == null) {
             return null;
         }
@@ -114,7 +115,6 @@ public class AvlSet<E extends Comparable<E>> extends BstSet<E> implements Sorted
                 }
             }
         } else if (n.getLeft() != null && n.getRight() != null) {
-            // TODO : Fix this
             n.element = ((AVLNode<E>) getMax(n.getLeft())).element;
             n.setLeft(removeRecursive(n.element, n.getLeft()));
             if (height(n.getRight()) - height(n.getLeft()) == 2) {
