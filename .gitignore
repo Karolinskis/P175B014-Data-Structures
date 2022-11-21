@@ -118,3 +118,8 @@ fabric.properties
 
 # Discord plugin
 .idea/discord.xml
+
+**/.idea/discord.xml
+**/.idea/vcs.xml
+**/workspace.xml
+
