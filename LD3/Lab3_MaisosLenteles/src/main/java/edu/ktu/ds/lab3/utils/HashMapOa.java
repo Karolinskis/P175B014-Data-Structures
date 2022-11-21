@@ -161,9 +161,19 @@ public class HashMapOa<K, V> implements EvaluableMap<K, V> {
         return null;
     }
 
+    // TODO: Studentams reikia realizuoti remove(K key)
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti remove(K key)");
+        int position = findPosition(key, false);
+        V removedValue = null;
+        if (position != -1 && table[position] != null && table[position] != DELETED) {
+            removedValue = table[position].value;
+            lastUpdated = position;
+            numberOfOccupied--;
+            table[position] = DELETED;
+            size--;
+        }
+        return removedValue;
     }
 
     @Override
@@ -255,12 +265,38 @@ public class HashMapOa<K, V> implements EvaluableMap<K, V> {
         return numberOfOccupied;
     }
 
+    // TODO: Studentams reikia realizuoti replace(K key,  V oldValue, V newValue)
     public boolean replace(K key, V oldValue, V newValue) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti replace(K key,  V oldValue, V newValue)");
+        int position = findPosition(key, false);
+        Entry<K, V> entry = getEntry(key, position);
+        if (entry != null && (oldValue == null || oldValue.equals(entry.value))) {
+            entry.value = newValue;
+            lastUpdated = position;
+            return true;
+        }
+        return false;
     }
 
+    public Entry<K, V> getEntry(K key, int position) {
+        if (key == null) {
+            throw new IllegalArgumentException("Key is null in get(K key)");
+        }
+
+        if (position != -1 && table[position] != null && table[position] != DELETED) {
+            return table[position];
+        }
+
+        return null;
+    }
+
+    // TODO: Studentams reikia realizuoti containsValue(Object value)
     public boolean containsValue(Object value) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti containsValue(Object value)");
+        for (int entryIndex = 0; entryIndex < getTableCapacity(); entryIndex++) {
+            if (table[entryIndex] != null && table[entryIndex].value.equals(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected static class Entry<K, V> {

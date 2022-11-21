@@ -178,9 +178,57 @@ public class HashMap<K, V> implements EvaluableMap<K, V> {
      * @param key Pora pašalinama iš atvaizdžio.
      * @return key raktas.
      */
+    // TODO: Studentams reikia realizuoti remove(K key)
     @Override
+
     public V remove(K key) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti remove(K key)");
+        if (key == null) {
+            throw new IllegalArgumentException("Key is null in get(K key)");
+        }
+
+        V removedValue = null;
+        int index = HashManager.hash(key.hashCode(), table.length, ht);
+        Node<K, V> node = table[index];
+        int chainSize = 0;
+        if (node != null) {
+            // Removed node if it is head
+            if (node.key.equals(key)) {
+                removedValue = table[index].value;
+                table[index] = node.next;
+                lastUpdatedChain = index;
+                size--;
+            }
+
+            // If chain is empty, update counter
+            if (table[index] == null) {
+                chainsCounter--;
+            }
+
+            else {
+                // Finds chain size and parent if exists
+                Node<K, V> parent = null;
+                if (node != null) {
+                    for (; node != null; node = node.next) {
+                        chainSize++;
+                        if (node.next != null && (node.next.key).equals(key)) {
+                            parent = node;
+                        }
+                    }
+                }
+
+                // Removes a node in the middle of the chain
+                if (parent != null) {
+                    removedValue = parent.next.value;
+                    parent.next = parent.next.next;
+                    lastUpdatedChain = index;
+                    chainSize--;
+                    size--;
+                }
+            }
+
+        }
+        maxChainSize = Math.max(maxChainSize, chainSize);
+        return removedValue;
     }
 
     /**
@@ -236,12 +284,33 @@ public class HashMap<K, V> implements EvaluableMap<K, V> {
         return result.toString();
     }
 
+    // TODO: Studentams reikia realizuoti replace(K key,  V oldValue, V newValue)
     public boolean replace(K key, V oldValue, V newValue) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti replace(K key,  V oldValue, V newValue)");
+        if (key == null) {
+            throw new IllegalArgumentException("Key is null in get(K key)");
+        }
+
+        int index = HashManager.hash(key.hashCode(), table.length, ht);
+        Node<K, V> node = getInChain(key, table[index]);
+        if (node != null && (oldValue == null || oldValue.equals(node.value))) {
+            node.value = newValue;
+            lastUpdatedChain = index;
+            return true;
+        }
+        return false;
     }
 
+    // TODO: Studentams reikia realizuoti containsValue(Object value)
     public boolean containsValue(Object value) {
-        throw new UnsupportedOperationException("Studentams reikia realizuoti containsValue(Object value)");
+        for (int chainIndex = 0; chainIndex < table.length; chainIndex++) {
+            Node<K, V> head = table[chainIndex];
+            for (Node<K, V> node = head; node != null; node = node.next) {
+                if (node.value.equals(value)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
