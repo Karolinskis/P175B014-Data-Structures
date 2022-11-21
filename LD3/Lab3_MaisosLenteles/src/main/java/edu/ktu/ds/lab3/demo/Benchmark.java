@@ -2,6 +2,7 @@ package edu.ktu.ds.lab3.demo;
 
 import edu.ktu.ds.lab3.utils.HashManager;
 import edu.ktu.ds.lab3.utils.HashMap;
+import edu.ktu.ds.lab3.utils.HashMapOa;
 import edu.ktu.ds.lab3.utils.Map;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.BenchmarkParams;
@@ -62,16 +63,35 @@ public class Benchmark {
     }
 
     @org.openjdk.jmh.annotations.Benchmark
-    public Map<String, Car> putMap() {
-        Map<String, Car> carsMap = new HashMap<>(HashManager.HashType.DIVISION);
-        putMappings(ids, cars, carsMap);
-        return carsMap;
+    public HashMap<String,Car> HashMapPut(FullMap fullMaps) {
+        HashMap<String,Car> carHashMap;
+        carHashMap = new HashMap<String, Car>(HashManager.HashType.DIVISION);
+
+        List<String> ids = fullMaps.ids;
+        List<Car> cars = fullMaps.cars;
+
+        for (int i = 0; i < ids.size(); i++) {
+            carHashMap.put(ids.get(i), cars.get(i));
+        }
+
+        return carHashMap;
     }
 
     @org.openjdk.jmh.annotations.Benchmark
-    public void removeCarMap(FullMap fullMap) {
-        fullMap.ids.forEach(id -> fullMap.carsMap.remove(id));
+    public HashMapOa<String, Car> HashMapPutOa(FullMap fullMaps) {
+        HashMapOa<String, Car> carHashMapOa;
+        carHashMapOa = new HashMapOa<String, Car>(HashManager.HashType.DIVISION);
+
+        List<String> ids = fullMaps.ids;
+        List<Car> cars = fullMaps.cars;
+
+        for (int i = 0; i < ids.size(); i++) {
+            carHashMapOa.put(ids.get(i), cars.get(i));
+        }
+
+        return carHashMapOa;
     }
+    
 
     public static void putMappings(List<String> ids, List<Car> cars, Map<String, Car> carsMap) {
         for (int i = 0; i < cars.size(); i++) {
