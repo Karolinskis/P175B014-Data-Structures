@@ -6,4 +6,4 @@ Projects in this repository:
 - [x] LD1 - Tiesinės duomenų struktūros
 - [x] LD2 - Aibės ir medžiai
 - [x] LD3 - Maišos lentelės
-- [ ] Technologinis projektas (TP)
+- [x] Technologinis projektas (TP)
