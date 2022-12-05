@@ -6,12 +6,21 @@ public class Tour {
 
     private Node start; // first Node in Linked List
 
-    // creates an empty tour
+    /**
+     * creates an empty tour
+     */
     public Tour() {
         start = new Node();
     }
 
-    // creates the 4-point tour a->b->c->d->a (for debugging)
+    /**
+     * (for debugging)
+     * creates the 4-point tour a->b->c->d->a
+     * @param a
+     * @param b
+     * @param c
+     * @param d
+     */
     public Tour(Point a, Point b, Point c, Point d) {
         start = new Node();
         Node b1 = new Node();
@@ -27,7 +36,11 @@ public class Tour {
         d1.next = start;
     }
 
-    // returns the number of points in this tour
+    /**
+     * returns the number of points in this tour
+     * @return
+     */
+    //
     public int size() {
         if (start.p == null) {
             return 0;
@@ -43,7 +56,10 @@ public class Tour {
         }
     }
 
-    // returns the length of this tour
+    /**
+     * returns the length of this tour
+     * @return
+     */
     public double length() {
         if (start.p == null) {
             return 0.0;
@@ -61,7 +77,10 @@ public class Tour {
 
     }
 
-    // returns a string representation of this tour
+    /**
+     * returns a string representation of this tour
+     * @return
+     */
     public String toString() {
         if (start.p == null) {
             return "";
@@ -77,13 +96,15 @@ public class Tour {
         }
     }
 
-    // draws this tour to standard drawing
+    /**
+     * draws this tour to standard drawing
+     */
     public void draw() {
         if (start.p != null && start.next != null) {
             Node current = start;
             do {
                 current.p.drawTo(current.next.p);
-                StdDraw.pause(50); // pause
+                //StdDraw.pause(50); // pause
                 StdDraw.show();
                 current = current.next;
             } while (!current.equals(start));
@@ -91,7 +112,10 @@ public class Tour {
 
     }
 
-    // inserts p using the nearest neighbor heuristic
+    /**
+     * inserts p using the nearest neighbor heuristic
+     * @param p
+     */
     public void insertNearest(Point p) {
         Node insert = new Node();
         insert.p = p;
@@ -117,7 +141,10 @@ public class Tour {
         }
     }
 
-    // inserts p using the smallest increase heuristic
+    /**
+     * inserts p using the smallest increase heuristic
+     * @param p
+     */
     public void insertSmallest(Point p) {
         Node insert = new Node();
         insert.p = p;

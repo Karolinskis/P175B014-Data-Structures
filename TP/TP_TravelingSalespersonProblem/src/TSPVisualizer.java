@@ -171,7 +171,7 @@ public class TSPVisualizer {
                     nearest.draw();
                     StdDraw.show();
                     if (animate)
-                        StdDraw.pause(50);
+                        StdDraw.pause(100);
                 }
                 StdDraw.show();
 
