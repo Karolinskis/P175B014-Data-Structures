@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="600a0afc-57ce-41ba-b7b6-9573d99cf7e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/ktu/ds/lab3/demo/HashMapOaTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/ktu/ds/lab3/demo/HashMapTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ktu/ds/lab3/demo/Benchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ktu/ds/lab3/demo/Benchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ktu/ds/lab3/demo/ManualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ktu/ds/lab3/demo/ManualTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +46,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/karol/Documents/GitHub/P175B014-Data-Structures/LD3/Lab3_MaisosLenteles",
+    "last_opened_file_path": "C:/Users/karol/Desktop/Traveling-Salesperson-Problem-master",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
